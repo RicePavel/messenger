@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/security 
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd
+       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+        >
 
   <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
@@ -24,15 +31,57 @@
   </bean>
 
   <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp" />
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:prefix="/WEB-INF/jsp/"
+        p:suffix=".jsp" />
 
   <!--
   The index controller.
   -->
   <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
+        class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+        p:viewName="index" />
+  
+  <!-- my context -->
+  
+  <!--
+<bean id="propertyConfigurer"
+  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+  p:location="/WEB-INF/jdbc.properties" /> -->
+
+  <!--
+  <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql:localhost"
+        p:username="messenger"
+        p:password="Juytuhbdsqktd1" />
+  -->
+  
+  <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql:localhost"
+        p:username="messenger"
+        p:password="Lkbyysqgenm!" />
+
+  <bean id="jdbcTemplate" 
+        class="org.springframework.jdbc.core.JdbcTemplate">
+    <constructor-arg ref="dataSource" />
+  </bean>
+  
+  <bean id="userDao" class="persistence.JdbcUserDao">
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
+  </bean>
+  
+  <bean id="userService" class="service.UserServiceImpl">
+    <property name="userDao" ref="userDao" />
+  </bean>
+  
+  <!--
+  <security:http auto-config="true">
+    <intercept-url pattern="/**" access="ROLE_SPITTER" />
+  </security:http>
+  -->
 
 </beans>

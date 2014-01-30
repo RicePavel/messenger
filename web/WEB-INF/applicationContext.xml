@@ -8,24 +8,15 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-  <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:location="/WEB-INF/jdbc.properties" />
-
-  <bean id="dataSource"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-        p:driverClassName="com.mysql.jdbc.Driver"
-        p:url="jdbc:mysql:localhost"
-        p:username="messenger"
-        p:password="Juytuhbdsqktd1" />
-
-  <bean id="jdbcTemplate" 
-        class="org.springframework.jdbc.core.JdbcTemplate">
-    <constructor-arg ref="dataSource" />
-  </bean>
+  <!--
+<bean id="propertyConfigurer"
+  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+  p:location="/WEB-INF/jdbc.properties" />
+-->
+ <!-- security -->
   
-  <bean id="spitterDao" class="persistence.JdbcUserDao">
-    <property name="jdbcTemplate" ref="jdbcTemplate" />
-  </bean>
+  <security:http auto-config="true">
+    <intercept-url pattern="/**" access="ROLE_SPITTER" />
+  </security:http>
 
 </beans>

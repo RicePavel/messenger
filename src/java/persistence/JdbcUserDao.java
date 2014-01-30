@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import persistence.common.UserDao;
 
 /**
@@ -18,6 +17,8 @@ import persistence.common.UserDao;
  * @author Rice Pavel
  */
 public class JdbcUserDao implements UserDao {
+  
+  
 
   private JdbcTemplate jdbcTemplate;
   private static final String SQL_INSERT_USER = "insert into user (login, password) values (?, ?)";

@@ -18,7 +18,7 @@ public interface MessageDao {
   
   public void saveMessage(Message message);
   
-  public User getMessageById(long id);
+  public Message getMessageById(long id);
   
 
   
