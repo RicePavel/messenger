@@ -19,7 +19,9 @@
       <table>
         <tr>
           <td align="right">Логин:</td>
-          <td><input type="text" name="login" /></td>
+          <td><input type="text" name="login" 
+                     value="<% if (request.getParameter("login") != null) { out.print(request.getParameter("login")); } %>" 
+                     /></td>
         </tr>
         <tr>
           <td align="right">Пароль:</td>

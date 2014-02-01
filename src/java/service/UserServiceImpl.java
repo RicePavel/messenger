@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public boolean registration(String login, String password) {
+    error = "";
     // если переданы все параметры
     boolean ok = false;
     if (!login.isEmpty() && !password.isEmpty()) {

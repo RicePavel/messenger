@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Rice Pavel
@@ -12,8 +14,18 @@ public class Message {
   
   private Long messageId;
   private String text;
+  private Long userId;
   private User user;
+  private Date insertDate;
 
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
+  
   public Long getMessageId() {
     return messageId;
   }
@@ -36,6 +48,14 @@ public class Message {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public Date getInsertDate() {
+    return insertDate;
+  }
+
+  public void setInsertDate(Date insertDate) {
+    this.insertDate = insertDate;
   }
   
   

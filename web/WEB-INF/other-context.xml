@@ -24,6 +24,10 @@
     <property name="jdbcTemplate" ref="jdbcTemplate" />
   </bean>
   
+  <bean id="messageDao" class="persistence.JdbcMessageDao">
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
+  </bean>
+  
   <bean id="userService" class="service.UserServiceImpl">
     <property name="userDao" ref="userDao" />
   </bean>

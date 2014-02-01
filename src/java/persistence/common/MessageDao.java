@@ -18,6 +18,12 @@ public interface MessageDao {
   
   public void saveMessage(Message message);
   
+  public List<Message> getMessagesByUserId(long userId);
+  
+  public List<Message> getRecentMessage();
+  
+  public void deleteMessage(Message message);
+  
   public Message getMessageById(long id);
   
 

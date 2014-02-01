@@ -20,7 +20,7 @@
 <table>
 	<tr>
 		<td align="right">Логин:</td>
-		<td><input type="text" name="j_username" /></td>
+		<td><input type="text" name="j_username"  /></td>
 	</tr>
 	<tr>
 		<td align="right">Пароль:</td>
