@@ -17,14 +17,13 @@ import persistence.common.UserDao;
  * @author Rice Pavel
  */
 public class JdbcUserDao implements UserDao {
-  
-  
 
   private JdbcTemplate jdbcTemplate;
   private static final String SQL_INSERT_USER = "insert into user (login, password) values (?, ?)";
   private static final String SQL_UPDATE_USER = "update user set login = ?, password = ? where user_id = ?";
-  private static final String SQL_SELECT_USER = "select user_id, login, password from users";
+  private static final String SQL_SELECT_USER = "select user_id, login, password from user";
   private static final String SQL_SELECT_USER_BY_ID = SQL_SELECT_USER + " where user_id = ?";
+  private static final String SQL_SELECT_USERS_BY_LOGIN = SQL_SELECT_USER + " where login = ?";
   private static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID() id";
 
   public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -71,7 +70,19 @@ public class JdbcUserDao implements UserDao {
               }
             });
   }
-  
-  
-  
+
+  @Override
+  public List<User> getUsersByLogin(String login) {
+    return jdbcTemplate.query(SQL_SELECT_USERS_BY_LOGIN,
+            new RowMapper<User>() {
+              @Override
+              public User mapRow(ResultSet rs, int i) throws SQLException {
+                User user = new User();
+                user.setUserId(rs.getLong(1));
+                user.setLogin(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                return user;
+              }
+            }, login);
+  }
 }

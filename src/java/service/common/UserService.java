@@ -19,4 +19,8 @@ public interface UserService {
   
   public List<User> getAllUsers();
   
+  public boolean registration(String login, String password);
+  
+  public String getError();
+  
 }
