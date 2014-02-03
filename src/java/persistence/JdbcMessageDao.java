@@ -27,6 +27,7 @@ public class JdbcMessageDao implements MessageDao {
   private static final String SQL_SELECT_MESSAGE = "select message_id, text, user_id, insert_date user_id from message";
   private static final String SQL_SELECT_MESSAGE_BY_ID = SQL_SELECT_MESSAGE + " where message_id = ?";
   private static final String SQL_SELECT_USERS_BY_USER = SQL_SELECT_MESSAGE + " where user_id = ?";
+  private static final String SQL_SELECT_MESSAGES_BY_LOGIN = "select m.message_id, m.text, m.user_id, m.insert_date from user u, message m where m.user_id = u.user_id and u.login = ?";
   private static final String SQL_SELECT_MESSAGES_RECENT = SQL_SELECT_MESSAGE + " limit 50 order by insert_date desc";
   private static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID() id";
 
@@ -61,6 +62,22 @@ public class JdbcMessageDao implements MessageDao {
                 return message;
               }
             }, userId);
+  }
+  
+  @Override
+  public List<Message> getMessagesByLogin(String login) {
+    return jdbcTemplate.query(SQL_SELECT_MESSAGES_BY_LOGIN,
+            new RowMapper<Message>() {
+              @Override
+              public Message mapRow(ResultSet rs, int i) throws SQLException {
+                Message message = new Message();
+                message.setMessageId(rs.getLong(i));
+                message.setText(rs.getString(2));
+                message.setUserId(rs.getLong(3));
+                message.setInsertDate(rs.getDate(4));
+                return message;
+              }
+            }, login);
   }
 
   @Override

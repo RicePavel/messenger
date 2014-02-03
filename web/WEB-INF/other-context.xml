@@ -32,6 +32,10 @@
     <property name="userDao" ref="userDao" />
   </bean>
   
+  <bean id="messageService" class="service.MessageServiceImpl">
+    <property name="messageDao" ref="messageDao" />
+  </bean>
+  
   <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
     
   

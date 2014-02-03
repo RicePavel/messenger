@@ -26,6 +26,6 @@ public interface MessageDao {
   
   public Message getMessageById(long id);
   
-
+  public List<Message> getMessagesByLogin(String login);
   
 }

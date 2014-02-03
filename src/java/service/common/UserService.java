@@ -17,6 +17,8 @@ public interface UserService {
   
   public User getUserById(long id);
   
+  public User getUserByLogin(String login);
+  
   public List<User> getAllUsers();
   
   public boolean registration(String login, String password);

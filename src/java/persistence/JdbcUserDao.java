@@ -85,4 +85,19 @@ public class JdbcUserDao implements UserDao {
               }
             }, login);
   }
+
+  @Override
+  public User getUserByLogin(String login) {
+    return jdbcTemplate.queryForObject(SQL_SELECT_USERS_BY_LOGIN,
+            new RowMapper<User>() {
+              @Override
+              public User mapRow(ResultSet rs, int i) throws SQLException {
+                User user = new User();
+                user.setUserId(rs.getLong(1));
+                user.setLogin(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                return user;
+              }
+            }, login);
+  }
 }
