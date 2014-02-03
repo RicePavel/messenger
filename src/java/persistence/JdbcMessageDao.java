@@ -21,14 +21,14 @@ import persistence.common.MessageDao;
 public class JdbcMessageDao implements MessageDao {
 
   private JdbcTemplate jdbcTemplate;
-  private static final String SQL_INSERT_MESSAGE = "insert into message (text, user_id, insert_date) values (?, ?)";
+  private static final String SQL_INSERT_MESSAGE = "insert into message (text, user_id, insert_date) values (?, ?, ?)";
   private static final String SQL_DELETE_MESSAGE = "delete from message where message_id = ?";
   private static final String SQL_UPDATE_MESSAGE = "update message set text = ?, user_id = ? where message_id = ?";
   private static final String SQL_SELECT_MESSAGE = "select message_id, text, user_id, insert_date user_id from message";
   private static final String SQL_SELECT_MESSAGE_BY_ID = SQL_SELECT_MESSAGE + " where message_id = ?";
   private static final String SQL_SELECT_USERS_BY_USER = SQL_SELECT_MESSAGE + " where user_id = ?";
   private static final String SQL_SELECT_MESSAGES_BY_LOGIN = "select m.message_id, m.text, m.user_id, m.insert_date from user u, message m where m.user_id = u.user_id and u.login = ?";
-  private static final String SQL_SELECT_MESSAGES_RECENT = SQL_SELECT_MESSAGE + " limit 50 order by insert_date desc";
+  private static final String SQL_SELECT_MESSAGES_RECENT = SQL_SELECT_MESSAGE + " order by insert_date desc limit 50";
   private static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID() id";
 
   public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -37,9 +37,8 @@ public class JdbcMessageDao implements MessageDao {
     
   @Override
   public void addMessage(Message message) {
-    Object[] parameters = {message.getText(), message.getUser(), message.getInsertDate()};
-    int[] types = {Types.LONGNVARCHAR, Types.BIGINT, Types.DATE};
-    jdbcTemplate.update(SQL_INSERT_MESSAGE, parameters, types);
+    Object[] parameters = {message.getText(), message.getUserId(), message.getInsertDate()};
+    jdbcTemplate.update(SQL_INSERT_MESSAGE, parameters);
     message.setMessageId(jdbcTemplate.queryForLong(SQL_SELECT_LAST_ID));
   }
 
@@ -55,7 +54,7 @@ public class JdbcMessageDao implements MessageDao {
               @Override
               public Message mapRow(ResultSet rs, int i) throws SQLException {
                 Message message = new Message();
-                message.setMessageId(rs.getLong(i));
+                message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
@@ -71,7 +70,7 @@ public class JdbcMessageDao implements MessageDao {
               @Override
               public Message mapRow(ResultSet rs, int i) throws SQLException {
                 Message message = new Message();
-                message.setMessageId(rs.getLong(i));
+                message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
@@ -81,13 +80,13 @@ public class JdbcMessageDao implements MessageDao {
   }
 
   @Override
-  public List<Message> getRecentMessage() {
+  public List<Message> getRecentMessages() {
     return jdbcTemplate.query(SQL_SELECT_MESSAGES_RECENT,
             new RowMapper<Message>() {
               @Override
               public Message mapRow(ResultSet rs, int i) throws SQLException {
                 Message message = new Message();
-                message.setMessageId(rs.getLong(i));
+                message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
@@ -108,7 +107,7 @@ public class JdbcMessageDao implements MessageDao {
               @Override
               public Message mapRow(ResultSet rs, int i) throws SQLException {
                 Message message = new Message();
-                message.setMessageId(rs.getLong(i));
+                message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));

@@ -10,15 +10,15 @@
   </head>
   <body>
     <h1>Просмотр сообщений</h1>
-  <c:if test="${! empty messages}">
+  <c:if test="${! empty messageList}">
     <table>
       <tr>
         <th>ИД пользователя</th>
         <th>Сообщение</th>
       </tr>
-      <c:forEach items="messages" var="message">
-        <tr>
-          <td>${message.userId}</td>
+      <c:forEach items="${messageList}" var="message">
+        <tr>  
+          <td>${message.userId}</td> 
           <td>${message.text}</td>
         </tr>
       </c:forEach>

@@ -20,7 +20,7 @@ public interface MessageDao {
   
   public List<Message> getMessagesByUserId(long userId);
   
-  public List<Message> getRecentMessage();
+  public List<Message> getRecentMessages();
   
   public void deleteMessage(Message message);
   

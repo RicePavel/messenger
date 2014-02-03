@@ -41,20 +41,21 @@ public class MessageController {
    *
    * @return
    */
-  @RequestMapping(value = {"/addMessages"})
+  @RequestMapping(value = {"/addMessage"})
   public String add(Map<String, Object> model, String text, String submit) {
     // создать сообщение
     Message message = new Message();
+    String login = SecurityContextHolder.getContext().getAuthentication().getName();
+    model.put("login", login);
     if (submit != null && !submit.isEmpty() && !text.isEmpty()) {
       message.setText(text);
       message.setInsertDate(new Date());
-      String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
       User user = userService.getUserByLogin(login);
       message.setUserId(user.getUserId());
       messageService.addMessage(message);
-      return "redirect:/messages?login=" + login;
+      return "redirect:/messages";
     }
-    return "addMessages";
+    return "addMessage";
   }
 
   /**
@@ -65,7 +66,7 @@ public class MessageController {
   @RequestMapping(value={"/messages"})
   public String showByUser(Map<String, Object> model, String login) {
     List<Message> messages = messageService.getMessagesByLogin(login);
-    model.put("messages", messages);
+    model.put("messageList", messages);
     return "messages";
   }
 
@@ -77,7 +78,7 @@ public class MessageController {
   @RequestMapping(value={"/recentMessages"})
   public String showRecent(Map<String, Object> model) {
     List<Message> messages = messageService.getRecentMessages();
-    model.put("messages", messages);
+    model.put("messageList", messages);
     return "messages";
   }
 }

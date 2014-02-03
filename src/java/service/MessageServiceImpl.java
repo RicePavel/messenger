@@ -30,7 +30,7 @@ public class MessageServiceImpl implements MessageService {
 
   @Override
   public List<Message> getRecentMessages() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return messageDao.getRecentMessages();
   }
 
   @Override

@@ -10,12 +10,13 @@
   </head>
   <body>
     <h1>Добавление сообщения</h1>
+    <div> ${login} </div>
 
     <c:if test="${!empty error}" >
       <div style="color: red;">${error}</div>
     </c:if>
     
-    <form method="POST" action="<c:url value="/addMessages" />" >
+    <form method="POST" action="<c:url value="/addMessage" />" >
       <table>
         <tr>
           <td align="right">Логин:</td>

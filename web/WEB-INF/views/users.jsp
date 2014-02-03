@@ -12,9 +12,9 @@
     <h1>Список пользователей</h1>
   <c:if test="${! empty userList}">
     <table>
-      <c:forEach items="userList" var="user">
+      <c:forEach items="${userList}" var="user">
         <tr>
-          <td><a href="<c:url value="/messages?login=${user.login}" />" > ${user.login} </a></td>
+          <td> <%-- <a href="<c:url value="/messages?login=${user.login}" />" > ${user.login} </a> --%> ${user.login} </td>
         </tr>
       </c:forEach>
     </table>
