@@ -13,23 +13,9 @@
 
   <%@ include file="/WEB-INF/jsp/menu.jsp" %>
   
+  <h1>Последние сообщения</h1>
   
-  <h1>Просмотр сообщений</h1>
+  <%@ include file="/WEB-INF/jsp/messagesTable.jsp" %>
   
-  
-  <c:if test="${! empty messageList}">
-    <table cellpadding="5">   
-      <tr>
-        <th>Пользователь</th>
-        <th>Сообщение</th>
-      </tr>
-      <c:forEach items="${messageList}" var="message">
-        <tr>  
-          <td>${message.user.login}</td> 
-          <td>${message.text}</td>
-        </tr>
-      </c:forEach>
-    </table>
-  </c:if>
 </body>
 </html>

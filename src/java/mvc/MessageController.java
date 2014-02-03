@@ -35,7 +35,7 @@ public class MessageController {
   public void setUserService(UserService userService) {
     this.userService = userService;
   }
-  
+
   /**
    * добавление сообщения
    *
@@ -63,11 +63,16 @@ public class MessageController {
    *
    * @return
    */
-  @RequestMapping(value={"/messages"})
+  @RequestMapping(value = {"/messages"})
   public String showByUser(Map<String, Object> model, String login) {
     List<Message> messages = messageService.getMessagesByLogin(login);
     model.put("messageList", messages);
-    return "messages";
+    String myLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+    if (myLogin.equals(login)) {
+      return "myMessages";
+    } else {
+      return "userMessages";
+    }
   }
 
   /**
@@ -75,10 +80,10 @@ public class MessageController {
    *
    * @return
    */
-  @RequestMapping(value={"/recentMessages"})
+  @RequestMapping(value = {"/recentMessages"})
   public String showRecent(Map<String, Object> model) {
     List<Message> messages = messageService.getRecentMessages();
     model.put("messageList", messages);
-    return "messages";
+    return "recentMessages";
   }
 }

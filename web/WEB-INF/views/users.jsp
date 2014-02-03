@@ -9,12 +9,15 @@
     <title>Messenger пользователи</title>
   </head>
   <body>
+    
+    <%@ include file="/WEB-INF/jsp/menu.jsp" %>
+    
     <h1>Список пользователей</h1>
   <c:if test="${! empty userList}">
     <table>
       <c:forEach items="${userList}" var="user">
         <tr>
-          <td> <%-- <a href="<c:url value="/messages?login=${user.login}" />" > ${user.login} </a> --%> ${user.login} </td>
+          <td>  <a href="<c:url value="/messages?login=${user.login}" />" > ${user.login} </a> </td>
         </tr>
       </c:forEach>
     </table>

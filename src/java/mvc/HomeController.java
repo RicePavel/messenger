@@ -19,7 +19,8 @@ public class HomeController {
   
   @RequestMapping(value={"/", "/home"}, method=RequestMethod.GET)
   public String showHomePage(Map<String, Object> model) {
-    return "home";
+    //return "home";
+    return "redirect:/recentMessages";
   }
   
 }

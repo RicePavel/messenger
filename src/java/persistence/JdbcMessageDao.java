@@ -27,8 +27,8 @@ public class JdbcMessageDao implements MessageDao {
   private static final String SQL_SELECT_MESSAGE = "select message_id, text, user_id, insert_date user_id from message";
   private static final String SQL_SELECT_MESSAGE_BY_ID = SQL_SELECT_MESSAGE + " where message_id = ?";
   private static final String SQL_SELECT_USERS_BY_USER = SQL_SELECT_MESSAGE + " where user_id = ?";
-  private static final String SQL_SELECT_MESSAGES_BY_LOGIN = "select m.message_id, m.text, m.user_id, m.insert_date from user u, message m where m.user_id = u.user_id and u.login = ?";
-  private static final String SQL_SELECT_MESSAGES_RECENT = SQL_SELECT_MESSAGE + " order by insert_date desc limit 50";
+  private static final String SQL_SELECT_MESSAGES_BY_LOGIN = "select m.message_id, m.text, m.user_id, m.insert_date, u.login from user u, message m where m.user_id = u.user_id and u.login = ?";
+  private static final String SQL_SELECT_MESSAGES_RECENT = "select m.message_id, m.text, m.user_id, m.insert_date, u.login from user u, message m where m.user_id = u.user_id order by m.insert_date desc limit 50";
   private static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID() id";
 
   public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -74,6 +74,11 @@ public class JdbcMessageDao implements MessageDao {
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
+                
+                User user = new User();
+                user.setLogin(rs.getString(5)); 
+                message.setUser(user);
+                
                 return message;
               }
             }, login);
@@ -90,6 +95,11 @@ public class JdbcMessageDao implements MessageDao {
                 message.setText(rs.getString(2));
                 message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
+                
+                User user = new User();
+                user.setLogin(rs.getString(5)); 
+                message.setUser(user);
+                
                 return message;
               }
             });

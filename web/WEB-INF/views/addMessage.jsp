@@ -9,8 +9,10 @@
     <title>Messenger добавление сообщения</title>
   </head>
   <body>
+    
+    <%@ include file="/WEB-INF/jsp/menu.jsp" %>
+    
     <h1>Добавление сообщения</h1>
-    <div> ${login} </div>
 
     <c:if test="${!empty error}" >
       <div style="color: red;">${error}</div>
