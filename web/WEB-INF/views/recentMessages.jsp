@@ -14,7 +14,7 @@
   <%@ include file="/WEB-INF/jsp/menu.jsp" %>
   
   <h1>Последние сообщения</h1>
-  
+    
   <%@ include file="/WEB-INF/jsp/messagesTable.jsp" %>
   
 </body>

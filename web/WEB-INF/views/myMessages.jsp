@@ -11,12 +11,11 @@
   </head>
   <body>
 
-  <%@ include file="/WEB-INF/jsp/menu.jsp" %>
-  
-  
-  <h1>Мои сообщения</h1>
-  
-  <%@ include file="/WEB-INF/jsp/messagesTable.jsp" %>
-  
-</body>
+    <%@ include file="/WEB-INF/jsp/menu.jsp" %>
+
+    <h1>Мои сообщения</h1>
+
+    <c:import url="/WEB-INF/jsp/messagesTable.jsp" />
+
+  </body>
 </html>

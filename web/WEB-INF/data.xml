@@ -21,21 +21,23 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 >
   
+  <!--
   <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
         p:driverClassName="com.mysql.jdbc.Driver"
         p:url="jdbc:mysql://localhost:3306/messenger"
         p:username="messenger"
         p:password="Juytuhbdsqktd1" />
+        -->
   
-  <!--
+  
    <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
         p:driverClassName="com.mysql.jdbc.Driver"
         p:url="jdbc:mysql://localhost:3306/messenger"
         p:username="messenger"
         p:password="Lkbyysqgenm1" />
-   -->
+  
 
   <bean id="jdbcTemplate" 
         class="org.springframework.jdbc.core.JdbcTemplate">

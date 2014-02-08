@@ -11,6 +11,7 @@
     <intercept-url pattern="/login.jsp" access="ROLE_USER, ROLE_ANONYMOUS" />
     <intercept-url pattern="/registration" access="ROLE_USER, ROLE_ANONYMOUS" />
     <intercept-url pattern="/**" access="ROLE_USER" />
+    
     <logout logout-url="/logout" logout-success-url="/" />
     <form-login login-page="/login.jsp" default-target-url="/" authentication-failure-url="/login.jsp?error=true" />
     

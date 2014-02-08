@@ -5,6 +5,8 @@
 package entity;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Message {
   private Long userId;
   private User user;
   private Date insertDate;
-
+  
   public Long getUserId() {
     return userId;
   }
