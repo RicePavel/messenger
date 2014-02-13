@@ -37,9 +37,11 @@ public class JdbcMessageDao implements MessageDao {
     
   @Override
   public void addMessage(Message message) {
-    Object[] parameters = {message.getText(), message.getUserId(), message.getInsertDate()};
+    /*
+    Object[] parameters = {message.getText(), message.getUserId, message.getInsertDate()};
     jdbcTemplate.update(SQL_INSERT_MESSAGE, parameters);
     message.setMessageId(jdbcTemplate.queryForLong(SQL_SELECT_LAST_ID));
+    */
   }
 
   @Override
@@ -56,7 +58,7 @@ public class JdbcMessageDao implements MessageDao {
                 Message message = new Message();
                 message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
-                message.setUserId(rs.getLong(3));
+                //message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
                 return message;
               }
@@ -72,7 +74,7 @@ public class JdbcMessageDao implements MessageDao {
                 Message message = new Message();
                 message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
-                message.setUserId(rs.getLong(3));
+                //message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
                 
                 User user = new User();
@@ -93,7 +95,7 @@ public class JdbcMessageDao implements MessageDao {
                 Message message = new Message();
                 message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
-                message.setUserId(rs.getLong(3));
+                //message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
                 
                 User user = new User();
@@ -119,7 +121,7 @@ public class JdbcMessageDao implements MessageDao {
                 Message message = new Message();
                 message.setMessageId(rs.getLong(1));
                 message.setText(rs.getString(2));
-                message.setUserId(rs.getLong(3));
+                //message.setUserId(rs.getLong(3));
                 message.setInsertDate(rs.getDate(4));
                 return message;
               }

@@ -72,5 +72,8 @@
   <!-- Файл с настройками контроллеров -->
   <import resource="controllers.xml" />
   
+  <!-- тестовые контроллеры -->
+  <import resource="test-controllers.xml" />
+  
 
 </beans>

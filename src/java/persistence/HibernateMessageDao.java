@@ -1,0 +1,75 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package persistence;
+
+import entity.Message;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import persistence.common.MessageDao;
+
+/**
+ *
+ * @author User
+ */
+public class HibernateMessageDao implements MessageDao {
+
+  private SessionFactory sessionFactory;
+
+  @Autowired
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
+  
+  private Session currentSession() {
+    return sessionFactory.getCurrentSession();
+  }
+  
+  @Override
+  public void addMessage(Message message) {
+    currentSession().save(message);
+  }
+
+  @Override
+  public void saveMessage(Message message) {
+    currentSession().update(message);
+  }
+
+  @Override
+  public List<Message> getMessagesByUserId(long userId) {
+    String queryString = "from Message where Message.userId = :userId order by Message.insert_date";
+    Query query = currentSession().createQuery(queryString);
+    query.setParameter("userId", userId);
+    return query.list();
+  }
+
+  @Override
+  public List<Message> getRecentMessages() {
+    return currentSession().createQuery("from Message order by Message.insert_date limit 50").list();
+  }
+
+  @Override
+  public void deleteMessage(Message message) {
+    currentSession().delete(message);
+  }
+
+  @Override
+  public Message getMessageById(long id) {
+    return (Message) currentSession().get(Message.class, id);
+  }
+
+  @Override
+  public List<Message> getMessagesByLogin(String login) {
+    String queryString = "from Message, User where Message.userId = User.userId and User.login = :login";
+    Query query = currentSession().createQuery(queryString);
+    query.setParameter("login", login);
+    return query.list();
+  }
+  
+  
+  
+}

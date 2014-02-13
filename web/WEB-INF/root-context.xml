@@ -17,11 +17,17 @@
 	
 	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
 	<context:annotation-config />
+        
+        
 	
 	<!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
 	<import resource="data.xml" />
         
+        <!-- Файл с настройками других компонентов -->
         <import resource="other-context.xml" />
+        
+        <!-- тестовые компоненты -->
+        <import resource="test-context.xml" />
 				
 	<!-- Файл с настройками безопасности -->
 	<import resource="security.xml" />

@@ -51,7 +51,8 @@ public class MessageController {
       message.setText(text);
       message.setInsertDate(new Date());
       User user = userService.getUserByLogin(login);
-      message.setUserId(user.getUserId());
+      //message.setUserId(user.getUserId());
+      message.setUser(user);
       messageService.addMessage(message);
       return "redirect:/messages";
     }
