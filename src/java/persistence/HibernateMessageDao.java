@@ -10,12 +10,16 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import persistence.common.MessageDao;
 
 /**
  *
  * @author User
  */
+@Repository("messageDao")
+@Transactional
 public class HibernateMessageDao implements MessageDao {
 
   private SessionFactory sessionFactory;
@@ -41,7 +45,7 @@ public class HibernateMessageDao implements MessageDao {
 
   @Override
   public List<Message> getMessagesByUserId(long userId) {
-    String queryString = "from Message where Message.userId = :userId order by Message.insert_date";
+    String queryString = "from Message where Message.userId = :userId order by insert_date";
     Query query = currentSession().createQuery(queryString);
     query.setParameter("userId", userId);
     return query.list();
@@ -49,7 +53,9 @@ public class HibernateMessageDao implements MessageDao {
 
   @Override
   public List<Message> getRecentMessages() {
-    return currentSession().createQuery("from Message order by Message.insert_date limit 50").list();
+    Query query = currentSession().createQuery("from Message order by insert_date");
+    query.setMaxResults(50);
+    return query.list();
   }
 
   @Override
@@ -64,7 +70,7 @@ public class HibernateMessageDao implements MessageDao {
 
   @Override
   public List<Message> getMessagesByLogin(String login) {
-    String queryString = "from Message, User where Message.userId = User.userId and User.login = :login";
+    String queryString = "from Message M where M.user.login = :login";
     Query query = currentSession().createQuery(queryString);
     query.setParameter("login", login);
     return query.list();
