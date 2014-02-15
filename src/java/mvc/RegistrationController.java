@@ -5,6 +5,8 @@
 package mvc;
 
 import java.util.Map;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,8 @@ public class RegistrationController {
   public String registration(Map<String, Object> model, String login, String password, String submit) {
     // если отправлена форма
     if (submit != null && !submit.isEmpty()) {
+      
+      
       
       boolean ok = userService.registration(login, password);
       if (ok) {

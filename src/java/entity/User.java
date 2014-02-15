@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,6 +28,7 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id")
   private Long userId;
+  @Size(min = 4, message="Длина имени пользователя должна быть не менее 4 символов!")
   @Column(name = "login")
   private String login;
   @Column(name = "password")
