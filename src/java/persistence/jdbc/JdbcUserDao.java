@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence;
+package persistence.jdbc;
 
 import entity.User;
 import java.sql.ResultSet;
@@ -14,6 +14,8 @@ import persistence.common.UserDao;
 
 /**
  *
+ * Примечание: этот класс может работать неправильно, т.к. классы Entity были изменены
+ * 
  * @author Rice Pavel
  */
 public class JdbcUserDao implements UserDao {

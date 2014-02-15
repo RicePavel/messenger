@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence;
+package persistence.jdbc;
 
 import entity.Message;
 import entity.User;
@@ -16,6 +16,8 @@ import persistence.common.MessageDao;
 
 /**
  *
+ * Примечание: этот класс может работать неправильно, т.к. классы Entity были изменены
+ * 
  * @author Новый профиль
  */
 public class JdbcMessageDao implements MessageDao {

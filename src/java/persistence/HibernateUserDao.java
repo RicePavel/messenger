@@ -56,7 +56,7 @@ public class HibernateUserDao implements UserDao {
 
   @Override
   public List<User> getUsersByLogin(String login) {
-    String queryString = "from User where User.login = :login";
+    String queryString = "from User U where U.login = :login";
     Query query = currentSession().createQuery(queryString);
     query.setParameter("login", login);
     return query.list();
@@ -64,7 +64,7 @@ public class HibernateUserDao implements UserDao {
 
   @Override
   public User getUserByLogin(String login) {
-    String queryString = "from User where User.login = :login";
+    String queryString = "from User U where U.login = :login";
     Query query = currentSession().createQuery(queryString);
     query.setParameter("login", login);
     return (User) query.uniqueResult();

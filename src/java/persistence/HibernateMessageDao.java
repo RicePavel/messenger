@@ -45,7 +45,7 @@ public class HibernateMessageDao implements MessageDao {
 
   @Override
   public List<Message> getMessagesByUserId(long userId) {
-    String queryString = "from Message where Message.userId = :userId order by insert_date";
+    String queryString = "from Message M where M.user.userId = :userId";
     Query query = currentSession().createQuery(queryString);
     query.setParameter("userId", userId);
     return query.list();
