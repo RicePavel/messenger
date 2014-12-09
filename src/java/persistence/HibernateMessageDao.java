@@ -35,7 +35,7 @@ public class HibernateMessageDao implements MessageDao {
   
   @Override
   public void addMessage(Message message) {
-    currentSession().save(message);
+    currentSession().save(message);            
   }
 
   @Override

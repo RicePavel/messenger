@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
         }
         */
         
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        //Set<ConstraintViolation<User>> violations = validator.validate(user);
         /*
         for (ConstraintViolation<User> violation: violations) {
           addError(violation.getMessage() + ". ");

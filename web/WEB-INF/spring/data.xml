@@ -68,6 +68,7 @@
     <property name="hibernateProperties">
       <props>
         <prop key="dialect">org.Hibernate.dialect.MySQLDialect</prop> 
+        <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
       </props>
     </property>
   </bean>
